@@ -22,14 +22,15 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
+    return Expanded(
+      child: ListView(
+        scrollDirection: Axis.horizontal,
         children: [
-          Container(color:Colors.black)
-          //ActivitatsActuals(),
-          //DadesActivitat(),
-          //NoticiariActual(),
-          //DadesNoticia(),
+          //Container(color: Colors.black, height: 30, width: 30)
+          ActivitatsActuals(),
+          DadesActivitat(),
+          NoticiariActual(),
+          DadesNoticia(),
         ],
       ),
     );
@@ -47,12 +48,105 @@ class ActivitatsActuals extends StatefulWidget {
 }
 
 class _ActivitatsActualsState extends State<ActivitatsActuals> {
+  TextEditingController _day;
+  TextEditingController _month;
+  TextEditingController _year;
+  final int dia = 18, month = 1, year = 2021;
+
+  @override
+  void initState() {
+    _day = TextEditingController(text: '$dia');
+    _month = TextEditingController(text: '$month');
+    _year = TextEditingController(text: '$year');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _day = TextEditingController();
+    _month = TextEditingController();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      color: Colors.amber,
-      child: Row(),
+      //height: 700,
+      width: 400,
+      color: Colors.blue[100],
+      /*child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              //mainAxisSize: MainAxisSize.max,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Llista Activitats',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                /*IconButton(
+                  icon: Icon(Icons.delete, color: Colors.black),
+                  onPressed: () {},
+                ),*/
+              ],
+            ),
+            /*SizedBox(height: 10),
+            Row(
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 60,
+                  height: 50,
+                  //color: Colors.blue,
+                  child: TextField(
+                    controller: _day,
+                    decoration: InputDecoration(
+                      labelText: 'Dia',
+                    ),
+                  ),
+                ),
+                SizedBox(width: 30),
+                Container(
+                  width: 60,
+                  height: 50,
+                  //color: Colors.blue,
+                  child: TextField(
+                    controller: _month,
+                    decoration: InputDecoration(
+                      labelText: 'Mes',
+                    ),
+                  ),
+                ),
+                SizedBox(width: 30),
+                Container(
+                  width: 60,
+                  height: 50,
+                  //color: Colors.blue,
+                  child: TextField(
+                    controller: _year,
+                    decoration: InputDecoration(
+                      labelText: 'Any',
+                    ),
+                  ),
+                ),
+                /*TextField(
+                  controller: _day,
+                  decoration: InputDecoration(labelText: 'Dia'),
+                ),*/
+              ],
+            ),*/
+          ],
+        ),
+      ),*/
     );
   }
 }
@@ -116,10 +210,10 @@ class _DadesActivitatState extends State<DadesActivitat> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 100,
-      color: Colors.black,
-      child: Column(children: [
+      //height: 200,
+      width: 400,
+      color: Colors.green[400],
+      /*child: Column(children: [
         TextField(
           decoration: InputDecoration(labelText: 'Tipus Activitat'),
           controller: controlTipus,
@@ -211,7 +305,7 @@ class _DadesActivitatState extends State<DadesActivitat> {
                 }),
           ],
         )
-      ]),
+      ]),*/
     );
   }
 }
@@ -242,16 +336,16 @@ class _NoticiariActualState extends State<NoticiariActual> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 100,
+      //height: 700,
+      width: 400,
       color: Colors.amber,
-      child: ListView.builder(
+      /*child: ListView.builder(
         itemCount: 6, ////////////////////////////////////////////
         itemBuilder: (context, index) {
           //final item = llistaActInscrites[index];
           return noticia();
         },
-      ),
+      ),*/
     );
   }
 }
@@ -288,10 +382,10 @@ class _DadesNoticiaState extends State<DadesNoticia> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 200,
-      color: Colors.black,
-      child: Column(children: [
+      //height: 200,
+      width: 400,
+      color: Colors.purple[200],
+      /*child: Column(children: [
         TextField(
           decoration: InputDecoration(labelText: 'Títol Notícia'),
           controller: controlTitol,
@@ -340,7 +434,7 @@ class _DadesNoticiaState extends State<DadesNoticia> {
                 }),
           ],
         )
-      ]),
+      ]),*/
     );
   }
 }
