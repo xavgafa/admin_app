@@ -32,7 +32,7 @@ class _NoticiariActualState extends State<NoticiariActual> {
       child: Scaffold(body:
         
           ListView.builder(
-            itemCount: 6, ////////////////////////////////////////////
+            itemCount: 6, /////////////////////////////////////////////
             itemBuilder: (context, index) {
               //final item = llistaActInscrites[index];
               return noticia();
