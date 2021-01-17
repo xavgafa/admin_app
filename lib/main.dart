@@ -3,9 +3,15 @@ import 'package:admin_app/parts/dadesActivitat.dart';
 import 'package:admin_app/parts/dadesNoticia.dart';
 import 'package:admin_app/parts/noticiariActual.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,13 +30,20 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final a = FirebaseFirestore.instance
+      .collection('Activitats')
+      .doc('c5Dz89sXkUZ7s77yI8pdPQ6s0Nz1')
+      .collection('inscripcions');
+    
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
+    print('$a');
+    return Scaffold(
+      body: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          //Container(color: Colors.black, height: 30, width: 30),
+          Text('$a'),
+          Container(color: Colors.black, height: 30, width: 30),
           ActivitatsActuals(),
           DadesActivitat(),
           NoticiariActual(),
@@ -40,5 +53,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
-
