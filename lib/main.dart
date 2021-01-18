@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() async {
+Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
@@ -18,31 +18,46 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.2
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
+    final noticies = FirebaseFirestore.instance
+        .collection('Usuaris')
+        .doc(
+            'c5Dz89sXkUZ7s77yI8pdPQ6s0Nz1') // '${FirebaseAuth.instance.currentUser}'//'c5Dz89sXkUZ7s77yI8pdPQ6s0Nz1'
+        .collection('inscripcions');
+    return StreamBuilder(
+      stream: noticies.snapshots(),
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final llistaNoticies = snapshot.data;
+
+        /* for (int i = 0; i < llistaActivitats.length; i++) {
+              final activitat = llistaActivitats[i];
+              if (inscripcions.contains(activitat.id)) {
+                activitat.inscrita = true;
+              }
+            }*/
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Gimnàs UFit: User App',
+          home: MyHomePage(),
+        );
+      },
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  final a = FirebaseFirestore.instance
-      .collection('Activitats')
-      .doc('c5Dz89sXkUZ7s77yI8pdPQ6s0Nz1')
-      .collection('inscripcions');
-    
+
   @override
   Widget build(BuildContext context) {
-    print('$a');
     return Scaffold(
       body: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          Text('$a'),
           Container(color: Colors.black, height: 30, width: 30),
           ActivitatsActuals(),
           DadesActivitat(),
